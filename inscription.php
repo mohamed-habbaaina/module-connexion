@@ -17,11 +17,11 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
             // Ce connecter a la base de données "utilisateurs"
             $connection = new mysqli($servername, $username, $password_b, $database) or die('Erreur');
             
-            //  Verification que le 'login' est pas attribuer.
-            $requ_verif = $connection->query("SELECT `login` FROM `utilisateurs`;");
+            //  Verification que le 'login' n'est pas attribuer.
+            $requ_verif = $connection->query("SELECT * FROM `utilisateurs` WHERE login='$login';");
             $login_verif = mysqli_num_rows($requ_verif);
-           if($login_verif == 0){
-            
+           if($login_verif === 0){
+
             //  ajouter l'utilisateur à la base de données
             $requ_inser = $connection->query("INSERT INTO `utilisateurs`(`login`, `prenom`, `nom`, `password`) VALUES ('$login', '$prenom', '$nom', '$password')");
             //  La fonction 'header pour la redirection au lieu de '<a href='

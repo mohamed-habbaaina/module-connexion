@@ -1,4 +1,7 @@
-<?php  ?>
+<?php 
+$prenom = $_GET['prenom'];
+$nom = $_GET['nom'];
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +13,7 @@
 </head>
 <body>
 <?php include 'header.php'; ?>
-
+<?php echo 'Bonjour ' . $prenom . ' ' . $nom; ?>
 <?php include 'footer.php' ?>
 </body>
 </html>

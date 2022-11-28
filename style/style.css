@@ -5,12 +5,15 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-a{
+/* a{
     list-style: none;
-}
+} */
+
 .nav{
     display: flex;
     justify-content: space-between;
+    height: 7vh;
+    width: 80%;
 }
 .logo{
     width: 20%;

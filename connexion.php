@@ -1,27 +1,29 @@
 <?php
+session_start();
 if (isset($_POST['submit'])){                          //  verifier que l'utilisateur a valider le formulaire.
     $login = strip_tags(trim($_POST['login']));         //  Securiser les information 
-    $co_password = strip_tags(trim($_POST['co_password']));
+    $password = strip_tags(trim($_POST['password']));
     if ($login && $password){    //  Vérification que tous les champs sont bien remplie
-        if ($password === $co_password){
-            $servername = 'localhost';
-            $username = 'root';
-            $password_b = '';
-            $database = 'moduleconnexion';
 
-            $password = md5($password);     // Cryptage du mot de passe.
-            
-            // Ce connecter a la base de données "utilisateurs"
-            $connection = new mysqli($servername, $username, $password_b, $database) or die('Erreur');
+            // include la connexion mysql
+            include 'includes/connect.php';
 
             //  Verification que le 'login' n'est pas attribuer.
             $requ_verif = $connection->query("SELECT * FROM `utilisateurs` WHERE login='$login' AND password='$password';");
             $login_verif = mysqli_num_rows($requ_verif);
-           if($login_verif > 0){
-            header("location: utilisateurs.php");
-           } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"utilisateurs.php\">ICI</a>.");
-        }
-    }
+            // var_dump($login_verif);
+            // echo '<br><br><br>';
+            if($login_verif > 0){
+                if ($login === 'admin'){            //  Verifier que l'utilisateur est 'Admin'.
+                    header("location: admin.php");  //  pour se connecter a la page 'admin.php'.
+                } else{
+                    $_SESSION['login'] = $login;
+                    header("location: utilisateurs.php");      // Redirection vers la page utilisateurs.php.
+                }
+
+            } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"utilisateurs.php\">ICI</a>.");
+        
+    } else echo 'Veiller remplir tous les champs !';
 }
 ?>
 <!DOCTYPE html>
@@ -39,7 +41,7 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
 <main>
     <div class="">
         <h1>Se connecter</h1>
-        <form action="utilisateurs.php" method="POST">
+        <form action="#" method="POST">
 
             <label for="login">login</label>
             <input type="text" name="login">
@@ -47,7 +49,7 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
             <label for="password">Password</label>
             <input type="password" name="password">
 
-            <input id="submit" type="submit" value="Valider" name="submit">
+            <input id="submit" type="submit" value="Connexion" name="submit">
         </form>
     </div>
 </main> 

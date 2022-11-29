@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,6 +12,6 @@
     <title>utilisateurs</title>
 </head>
 <body>
-    <p><?php echo 'bien venue ' ; ?></p>
+    <p><?php echo 'Bienvenue ' . $_SESSION['login'] ; ?></p>
 </body>
 </html>

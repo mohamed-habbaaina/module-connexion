@@ -1,3 +1,4 @@
+<!-- Mohamed HABBAAINA Le 28/11/2022 -->
 <?php
 if (isset($_POST['submit'])){                           //  verifier que l'utilisateur a valider le formulaire.
     $login = strip_tags(trim($_POST['login']));         //  Securiser les information 
@@ -7,16 +8,10 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
     $co_password = strip_tags(trim($_POST['co_password']));
     if ($login && $prenom && $nom && $password && $co_password){    //  Vérification que tous les champs sont bien remplie
         if ($password === $co_password){
-            $servername = 'localhost';
-            $username = 'root';
-            $password_b = '';
-            $database = 'moduleconnexion';
+            
+            // include la connexion mysql
+            include 'includes/connect.php';
 
-            $password = md5($password);     // Cryptage du mot de passe.
-            
-            // Ce connecter a la base de données "utilisateurs"
-            $connection = new mysqli($servername, $username, $password_b, $database) or die('Erreur');
-            
             //  Verification que le 'login' n'est pas attribuer.
             $requ_verif = $connection->query("SELECT * FROM `utilisateurs` WHERE login='$login';");
             $login_verif = mysqli_num_rows($requ_verif);
@@ -30,10 +25,14 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
 
            } else die('Le login n\'est pas disponible, Veuillez le changer.');
             //  Géré le cas de confirmation de mot de passe est défirent que le mot de passe.
-            } else echo 'Veiller rentrer le meme password';
+            } else {
+                $ver_pass = 'Veiller rentrer le meme password';
+            }
             
             // Géré le cas où l'utilisateur ne remplit pas toutes les cases.
-    } else echo 'Veiller remplir tous les champs';
+    } else {
+        $champs_vide = 'Veiller remplir tous les champs';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -50,6 +49,12 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
 <?php include 'includes/header.php'; ?>
 <main>
     <div class="connect">
+        <p><?php if (isset($champs_vide)){
+            echo $champs_vide;
+        } elseif (isset($ver_pass)){
+            echo $ver_pass;
+        }
+        ?></p>
         <h1>Création de compte</h1>
         <form action="#" method="POST">
             <label for="login">login</label>

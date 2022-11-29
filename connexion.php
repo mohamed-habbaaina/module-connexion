@@ -1,3 +1,29 @@
+<?php
+if (isset($_POST['submit'])){                          //  verifier que l'utilisateur a valider le formulaire.
+    $login = strip_tags(trim($_POST['login']));         //  Securiser les information 
+    $co_password = strip_tags(trim($_POST['co_password']));
+    if ($login && $password){    //  Vérification que tous les champs sont bien remplie
+        if ($password === $co_password){
+            $servername = 'localhost';
+            $username = 'root';
+            $password_b = '';
+            $database = 'moduleconnexion';
+
+            $password = md5($password);     // Cryptage du mot de passe.
+            
+            // Ce connecter a la base de données "utilisateurs"
+            $connection = new mysqli($servername, $username, $password_b, $database) or die('Erreur');
+
+            //  Verification que le 'login' n'est pas attribuer.
+            $requ_verif = $connection->query("SELECT * FROM `utilisateurs` WHERE login='$login' AND password='$password';");
+            $login_verif = mysqli_num_rows($requ_verif);
+           if($login_verif > 0){
+            header("location: utilisateurs.php");
+           } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"utilisateurs.php\">ICI</a>.");
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

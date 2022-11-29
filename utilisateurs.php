@@ -9,6 +9,6 @@
     <title>utilisateurs</title>
 </head>
 <body>
-    <p><?php echo 'bien venue ' . $nom . ' ' . $nom; ?></p>
+    <p><?php echo 'bien venue ' ; ?></p>
 </body>
 </html>

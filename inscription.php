@@ -8,7 +8,9 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
     $co_password = strip_tags(trim($_POST['co_password']));
     if ($login && $prenom && $nom && $password && $co_password){    //  Vérification que tous les champs sont bien remplie
         if ($password === $co_password){
-            
+           
+            $password = md5($password);     // Cryptage du mot de passe.
+
             // include la connexion mysql
             include 'includes/connect.php';
 

@@ -4,6 +4,8 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
     $login = strip_tags(trim($_POST['login']));         //  Securiser les information 
     $password = strip_tags(trim($_POST['password']));
     if ($login && $password){    //  Vérification que tous les champs sont bien remplie
+    
+            $password = md5($password);     // Cryptage du mot de passe.
 
             // include la connexion mysql
             include 'includes/connect.php';

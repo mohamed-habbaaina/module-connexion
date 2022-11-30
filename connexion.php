@@ -19,11 +19,14 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
                 } else{
                     $_SESSION['login'] = $login;
                     header("location: utilisateurs.php");      // Redirection vers la page utilisateurs.php.
+                    //  header("refresh:2; url=utilisateurs.php");  // Redirection vers la page utilisateurs.php avec un tempt d'arret de 2 sec.
                 }
 
             } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"utilisateurs.php\">ICI</a>.");
         
-    } else echo 'Veiller remplir tous les champs !';
+    } else{
+        $champs_vide = 'Veiller remplir tous les champs !';
+    } 
 }
 ?>
 <!DOCTYPE html>
@@ -40,6 +43,10 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
 <?php include 'includes/header.php'; ?>
 <main>
     <div class="">
+        <p><?php if (isset($champs_vide)){
+            echo $champs_vide;
+        }
+        ?></p>
         <h1>Se connecter</h1>
         <form action="#" method="POST">
 

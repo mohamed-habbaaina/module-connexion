@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if ($_SESSION['login'] != 'admin'){
+    header("location: index.php");
+    exit;
+}
 require 'includes/connect.php';
 // requete pour recupérer les données
 $requ = $connection->query("SELECT `id`, `login`, `prenom`, `nom` FROM `utilisateurs`;");
@@ -29,7 +32,7 @@ if (isset($_GET['submit']) && !empty($_get['deconnecter'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/connect.css">
-    <title>utilisateurs</title>
+    <title>Admin</title>
 </head>
 <header>
         <div class="nav">
@@ -61,7 +64,6 @@ if (isset($_GET['submit']) && !empty($_get['deconnecter'])){
                print_r($result_fetch_all[$i][$j]);
                echo '</td>';
             }
-            // echo '<\tr>';
          }
         ?>
       </tbody>

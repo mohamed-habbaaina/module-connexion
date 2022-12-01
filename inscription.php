@@ -1,5 +1,6 @@
 <!-- Mohamed HABBAAINA Le 28/11/2022 -->
 <?php
+session_start();
 if (isset($_POST['submit'])){                           //  verifier que l'utilisateur a valider le formulaire.
     $login = strip_tags(trim($_POST['login']));         //  Securiser les information 
     $prenom = strip_tags(trim($_POST['prenom']));
@@ -21,6 +22,7 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
 
             //  ajouter l'utilisateur à la base de données
             $requ_inser = $connection->query("INSERT INTO `utilisateurs`(`login`, `prenom`, `nom`, `password`) VALUES ('$login', '$prenom', '$nom', '$password')");
+            $_SESSION['login'] = $login;
             //  La fonction 'header pour la redirection au lieu de '<a href='
             header("location: connexion.php");
             // die("Inscription terminé, <a href=\"utilisateurs.php\">connecter vous</a>");
@@ -33,7 +35,7 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
             
             // Géré le cas où l'utilisateur ne remplit pas toutes les cases.
     } else {
-        $champs_vide = 'Veiller remplir tous les champs';
+        $champs_vide = 'Veiller remplir tous les champs !';
     }
 }
 ?>
@@ -60,19 +62,19 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
         <h1>Création de compte</h1>
         <form action="#" method="POST">
             <label for="login">login</label>
-            <input type="text" name="login">
+            <input type="text" name="login" placeholder="login">
 
             <label for="prenom">Prénom</label>
-            <input type="text" name="prenom">
+            <input type="text" name="prenom" placeholder="Prénom">
 
             <label for="nom">Nom</label>
-            <input type="text" name="nom">
+            <input type="text" name="nom" placeholder="Nom">
 
             <label for="password">Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" placeholder="Password">
 
             <label for="co_password">Confirme Password</label>
-            <input type="password" name="co_password">
+            <input type="password" name="co_password" placeholder="Confirme Password">
 
             <input id="submit" type="submit" value="Valider" name="submit">
         </form>

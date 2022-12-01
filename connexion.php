@@ -19,12 +19,12 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
                 if ($login === 'admin'){            //  Verifier que l'utilisateur est 'Admin'.
                     header("location: admin.php");  //  pour se connecter a la page 'admin.php'.
                 } else{
-                    $_SESSION['login'] = $login;
-                    header("location: utilisateurs.php");      // Redirection vers la page utilisateurs.php.
-                    //  header("refresh:2; url=utilisateurs.php");  // Redirection vers la page utilisateurs.php avec un tempt d'arret de 2 sec.
+                    $_SESSION['login'] = $login;               // Création d'une variablede globale de session 
+                    header("location: profil.php");      // Redirection vers la page utilisateurs.php.
+                    //  header("refresh:2; url=profil.php");  // Redirection vers la page utilisateurs.php avec un tempt d'arret de 2 sec.
                 }
 
-            } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"utilisateurs.php\">ICI</a>.");
+            } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"inscription.php\">ICI</a>.");
         
     } else{
         $champs_vide = 'Veiller remplir tous les champs !';
@@ -53,10 +53,10 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
         <form action="#" method="POST">
 
             <label for="login">login</label>
-            <input type="text" name="login">
+            <input type="text" name="login" placeholder="login">
 
             <label for="password">Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" placeholder="password">
 
             <input id="submit" type="submit" value="Connexion" name="submit">
         </form>

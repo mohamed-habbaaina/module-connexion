@@ -27,7 +27,9 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
             header("location: connexion.php");
             // die("Inscription terminé, <a href=\"utilisateurs.php\">connecter vous</a>");
 
-           } else die('Le login n\'est pas disponible, Veuillez le changer.');
+           } else {
+            $ver_login = 'Le login n\'est pas disponible, Veuillez le changer.';
+           }
             //  Géré le cas de confirmation de mot de passe est défirent que le mot de passe.
             } else {
                 $ver_pass = 'Veiller rentrer le meme password';
@@ -52,11 +54,14 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
 <body>
 <?php include 'includes/header.php'; ?>
 <main>
-    <div class="connect">
-        <p><?php if (isset($champs_vide)){
+    <div class="form_conn">
+        <p id="erreur"><?php if (isset($champs_vide)){
             echo $champs_vide;
         } elseif (isset($ver_pass)){
             echo $ver_pass;
+        }
+        elseif (isset($ver_login)){
+            echo $ver_login;
         }
         ?></p>
         <h1>Création de compte</h1>

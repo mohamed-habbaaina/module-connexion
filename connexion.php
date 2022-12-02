@@ -44,8 +44,8 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
 <body>
 <?php include 'includes/header.php'; ?>
 <main>
-    <div class="">
-        <p><?php if (isset($champs_vide)){
+    <div class="form_conn">
+        <p id="erreur"><?php if (isset($champs_vide)){
             echo $champs_vide;
         }
         ?></p>

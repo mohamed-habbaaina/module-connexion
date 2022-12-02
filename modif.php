@@ -45,7 +45,7 @@ if (isset($_POST['submit']) && !empty($_POST['submit'])){
         $ver_log = 'Veuillez rentrez un Login !';
         echo $ver_log;
     }
-} else echo 'sorti';
+} else //echo 'sorti';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -1,10 +1,15 @@
     <header>
-        <div class="nav">
-            <div class="logo"><a href=""></a></div>
-            <div class="nav_bar">
-                <a href="index.php">Accueil</a>
-                <a href="connexion.php">Se connecter</a>
-                <a href="inscription.php">Créer compte</a>
-            </div>
-        </div>
+        <nav class="navbar">
+            <a href="#" class="logo">LOGO</a>
+                <ul class="nav-links">
+                    <li><a href="index.php">Accueil</a></li>
+                    <li><a href="connexion.php">Se Connecter</a></li>
+                    <li><a href="inscription.php">Créer Un Compte</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+        </nav>
     </header>

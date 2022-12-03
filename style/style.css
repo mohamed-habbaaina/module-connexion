@@ -126,8 +126,11 @@ overflow: hidden;
 .burger{
     display: block;
 }
-}
 .nav-active{
     transform: translateX(0%);
+}
+.github{
+    margin: 50% 0% 0 14%;
+}
 }
 

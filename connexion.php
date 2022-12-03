@@ -16,15 +16,18 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
             // var_dump($login_verif);
             // echo '<br><br><br>';
             if($login_verif > 0){
+                $_SESSION['login'] = $login;               // Création d'une variablede globale de session 
                 if ($login === 'admin'){            //  Verifier que l'utilisateur est 'Admin'.
                     header("location: admin.php");  //  pour se connecter a la page 'admin.php'.
                 } else{
-                    $_SESSION['login'] = $login;               // Création d'une variablede globale de session 
+//                    $_SESSION['login'] = $login;               // Création d'une variablede globale de session 
                     header("location: profil.php");      // Redirection vers la page utilisateurs.php.
                     //  header("refresh:2; url=profil.php");  // Redirection vers la page utilisateurs.php avec un tempt d'arret de 2 sec.
                 }
 
-            } else die("Ce compte n\'existe pas, Veuille vous inscrire <a href=\"inscription.php\">ICI</a>.");
+            } else {
+                $err_log = 'Login ou Password incorrecte !';
+            }
         
     } else{
         $champs_vide = 'Veiller remplir tous les champs !';
@@ -45,11 +48,15 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
 <?php include 'includes/header.php'; ?>
 <main>
     <div class="form_conn">
+
+        <h1>Se connecter</h1>
         <p id="erreur"><?php if (isset($champs_vide)){
             echo $champs_vide;
         }
+        if (isset($err_log)){
+            echo $err_log;
+        }
         ?></p>
-        <h1>Se connecter</h1>
         <form action="#" method="POST">
 
             <label for="login">login</label>
@@ -62,7 +69,5 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
         </form>
     </div>
 </main> 
-<?php include 'includes/footer.php' ?>
-    
 </body>
 </html>

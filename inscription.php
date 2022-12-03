@@ -55,6 +55,8 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
 <?php include 'includes/header.php'; ?>
 <main>
     <div class="form_conn">
+        
+        <h1>Création de compte</h1>
         <p id="erreur"><?php if (isset($champs_vide)){
             echo $champs_vide;
         } elseif (isset($ver_pass)){
@@ -64,7 +66,6 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
             echo $ver_login;
         }
         ?></p>
-        <h1>Création de compte</h1>
         <form action="#" method="POST">
             <label for="login">login</label>
             <input type="text" name="login" placeholder="login">
@@ -85,6 +86,5 @@ if (isset($_POST['submit'])){                           //  verifier que l'utili
         </form>
     </div>
 </main> 
-<?php include 'includes/footer.php' ?>
 </body>
 </html>

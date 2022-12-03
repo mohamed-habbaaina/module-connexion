@@ -1,9 +1,15 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])){    // Verifier que l'utilisateur est bien connecter.
     header("location: index.php");
     exit;
 }
+$login = $_SESSION['login'];
+if ($_SESSION['login'] != $login){  // Sécuriser l'accès à la page profil.
+    header("location: index.php");
+    exit;
+}
+
 if (isset($_GET['submit']) && !empty($_get['deconnecter'])){
     $_SESSION = array();//Ecraser le tableau de session 
     session_unset(); //Detruit toutes les variables de la session en cours
@@ -22,17 +28,23 @@ if (isset($_GET['submit']) && !empty($_get['deconnecter'])){
     <title>Profile</title>
 </head>
 <header>
-        <div class="nav">
-            <div class="logo"><a href=""></a></div>
-            <div class="nav_bar">
-                <a href="index.php">Accueil</a>
-                <button type="submit" name="deconnecter" ><a href="index.php">Se déconnecter</a></button>
-                <button type="submit" name="modif" ><a href="modif.php">Modifier vous information</a></button>
+
+    <nav class="navbar">
+        <a href="index.php" class="logo">LOGO</a>
+            <ul class="nav-links">
+                <li><a href="index.php">Accueil</a></li>
+                <li type="submit" name="deconnecter"><a href="index.php">Se déconnecter</a></button></li>
+                <li type="submit" name="modif"><a href="modif.php">Modifier vous information</a></button></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
             </div>
-        </div>
-    </header>
+    </nav>
+</header>
 <body>
-    <p><?php echo 'Bienvenue ' . $_SESSION['login'] ; ?></p>
+    <div class="bienvenue"><?php echo 'Bienvenue ' . $_SESSION['login'] ; ?></div>
 
 </body>
 </html>

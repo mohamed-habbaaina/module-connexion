@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['login'] != 'admin'){
+if ($_SESSION['login'] != 'admin'){     //  Sécuriser l'accès à la page Admin.
     header("location: index.php");
     exit;
 }
@@ -34,39 +34,49 @@ if (isset($_GET['submit']) && !empty($_get['deconnecter'])){
     <link rel="stylesheet" href="style/connect.css">
     <title>Admin</title>
 </head>
-<header>
-        <div class="nav">
-            <div class="logo"><a href=""></a></div>
-            <div class="nav_bar">
-                <a href="index.php">Accueil</a>
-                <button type="submit" name="deconnecter" ><a href="index.php">Se déconnecter</a></button>
-                <button type="submit" name="modif" ><a href="modif.php">Se </a></button>
-            </div>
-        </div>
-    </header>
 <body>
-    <p><?php echo 'Bonjour Admin'; ?></p>
-    <table>
-    <thead>
-         <th>id</th>
-         <th>login</th>
-         <th>prenom</th>
-         <th>nom</th>
-      </thead>
-      <tbody>
-      <?php
-            // On va utiliser une boucle pour remplire le tableau.
-         $i = 0;
-         for($i = 0; $i < $num_rows ; $i++){         // Pour parcurire les colonnes.
-            echo '<tr>';                     // crée une nouvelle ligne.
-            for($j = 0; $j < 4; $j++){       // pour parcurire les linges
-               echo '<td>';
-               print_r($result_fetch_all[$i][$j]);
-               echo '</td>';
-            }
-         }
-        ?>
-      </tbody>
-    </table>
+<header>
+
+    <nav class="navbar">
+        <a href="index.php" class="logo">LOGO</a>
+            <ul class="nav-links">
+                <li><a href="index.php">Accueil</a></li>
+                <li type="submit" name="deconnecter"><a href="index.php">Se déconnecter</a></button></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+    </nav>
+</header>
+    <div class="admin_tabl">    
+        <table >
+            <div><h3>Liste des utilisateurs</h3></div>
+            <div>
+                <thead>
+                    <th>id</th>
+                    <th>Login</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                </thead>
+                <tbody>
+                <?php
+                    // On va utiliser une boucle pour remplire le tableau.
+                 $i = 0;
+                 for($i = 0; $i < $num_rows ; $i++){         // Pour parcurire les colonnes.
+                    echo '<tr>';                     // crée une nouvelle ligne.
+                    for($j = 0; $j < 4; $j++){       // pour parcurire les linges
+                       echo '<td>';
+                       print_r($result_fetch_all[$i][$j]);
+                       echo '</td>';
+                    }
+                 }
+                ?>
+                </tbody>
+            </div>
+        </table>
+
+    </div>
 </body>
 </html>

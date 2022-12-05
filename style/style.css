@@ -101,9 +101,10 @@ font-weight: bold;
     width: 65%;
 }
 .github{
-    margin: 45% 0 0 40%;
+    margin: 25% 0 0 20%;
 
-}    
+}
+  
 }
 @media screen and (max-width: 768px){
 body{
@@ -132,5 +133,6 @@ overflow: hidden;
 .github{
     margin: 50% 0% 0 14%;
 }
+
 }
 

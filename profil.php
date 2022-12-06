@@ -44,7 +44,7 @@ if (isset($_GET['submit']) && !empty($_get['deconnecter'])){
     </nav>
 </header>
 <body>
-    <div class="bienvenue"><?php echo 'Bienvenue ' . $_SESSION['login'] ; ?></div>
+    <div class="bienvenue"><?php echo 'Bienvenue ' . $login ; ?></div>
 
 </body>
 </html>

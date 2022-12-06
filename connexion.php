@@ -20,7 +20,7 @@ if (isset($_POST['submit'])){                          //  verifier que l'utilis
                 if ($login === 'admin'){            //  Verifier que l'utilisateur est 'Admin'.
                     header("location: admin.php");  //  pour se connecter a la page 'admin.php'.
                 } else{
-//                    $_SESSION['login'] = $login;               // Création d'une variablede globale de session 
+                //    $_SESSION['login'] = $login;               // Création d'une variablede globale de session 
                     header("location: profil.php");      // Redirection vers la page utilisateurs.php.
                     //  header("refresh:2; url=profil.php");  // Redirection vers la page utilisateurs.php avec un tempt d'arret de 2 sec.
                 }

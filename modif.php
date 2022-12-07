@@ -16,11 +16,11 @@ if (isset($_POST['submit']) && !empty($_POST['submit'])){
             if ($_POST['password'] === $_POST['co_password']){
             $now_login = $_POST['login'];
             require 'includes/connect.php';     // Se connecter à la base de données.
-            $requ = $connection->query("SELECT * FROM `utilisateurs` WHERE login='$now_login';");
+            $requ = $connection->query("SELECT * FROM `utilisateurs` WHERE (login='$now_login') OR (login='$login');");
             
             //  Verifier que le now login est disponible.
             $login_verif = mysqli_num_rows($requ);
-            if ($login_verif === 0){
+            if ($login_verif === 1){
 
                 //  Securiser les information.
                 $nw_login = strip_tags(trim($_POST['login']));
@@ -31,12 +31,9 @@ if (isset($_POST['submit']) && !empty($_POST['submit'])){
                 //  Requette sql pour changer les données.
                 $requ_update = $connection->query("UPDATE `utilisateurs` SET `login`='$nw_login', `password`='$nw_password' WHERE login='$login';");
 
-                $_SESSION = array();//Ecraser le tableau de session 
-                session_unset(); //Detruit toutes les variables de la session en cours
-                session_destroy();//Destruit la session en cours
-
+                $_SESSION['login'] = $nw_login;
                 //  die la page actuel aprés avoir detruit les données de la session.
-                die('Votre nouveau login et password on bien été enregistrée !');
+                header("Refresh:5; url=profil.php");
             } else echo 'Le login n\'est pas disponible, Veuillez le changer !';
         
             } echo 'Veiller rentrer le meme password !';
@@ -62,7 +59,7 @@ if (isset($_POST['submit']) && !empty($_POST['submit'])){
         <h4>Changer vos informations</h4>
         <form action="#" method="POST">
             <label for="login">login</label>
-            <input type="text" name="login" placeholder="<?= $login ?>">
+            <input type="text" name="login" value="<?= $login ?>">
 
             <label for="password">Now Password</label>
             <input type="password" name="password" placeholder="Now Password">
